@@ -15,7 +15,7 @@
 - Security
 
 ### Container Network Model
-
+<img src="https://github.com/RokibulHasan7/notes/blob/main/docker/photos/container-model.png?raw=true" alt="Docker-Network" width=100% >
 - It is an isolated sandbox that holds the network configuration of containers.
 - Sandbox is created when a user requests to generate an endpoint on the network.
 - It can have several endpoints in a network, as it represents a container's network configuration such as IP-address, MAC-address, DNS etc.
