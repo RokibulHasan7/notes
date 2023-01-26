@@ -33,6 +33,8 @@
        ```
             docker rmi <id>
             docker rmi <repository> : <tag>
+            
+            docker rmi -f <id>
        ```
     
 - Display logs of a container
