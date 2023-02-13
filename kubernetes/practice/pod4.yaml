@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: book
+spec:
+  containers:
+    - image: rokibulhasan114/book-api:v0.0.5
+      name: book
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "128Mi"
+      ports:
+        - containerPort: 3333
+          name: http
+          protocol: TCP

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Updated to Red"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"run":"bookapi"},"name":"bookapi","namespace":"default"},"spec":{"replicas":3,"selector":{"matchLabels":{"run":"bookapi"}},"template":{"metadata":{"labels":{"run":"bookapi"}},"spec":{"containers":[{"image":"rokibulhasan114/book-api:v0.0.5","name":"bookapi"}]}}}}
+  creationTimestamp: "2023-02-08T04:43:37Z"
+  generation: 8
+  labels:
+    run: bookapi
+  name: bookapi
+  namespace: default
+  resourceVersion: "212483"
+  uid: f77b0634-e158-4679-b172-0f6947b0649b
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: bookapi
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: bookapi
+    spec:
+      containers:
+      - image: rokibulhasan114/book-api:v0.0.5
+        imagePullPolicy: IfNotPresent
+        name: bookapi
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 3
+  conditions:
+  - lastTransitionTime: "2023-02-08T04:51:23Z"
+    lastUpdateTime: "2023-02-08T04:51:23Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2023-02-08T04:54:07Z"
+    lastUpdateTime: "2023-02-08T04:54:07Z"
+    message: ReplicaSet "bookapi-7b786f49dd" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 8
+  readyReplicas: 3
+  replicas: 3
+  updatedReplicas: 3

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookapi
+  labels:
+    run: bookapi
+spec:
+  selector:
+    matchLabels:
+      run: bookapi
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: bookapi
+    spec:
+      containers:
+        - name: bookapi
+          image: rokibulhasan114/book-api:v0.0.5

@@ -116,4 +116,23 @@ CMD - Specifies what command to run within the container.
 - Checks for the task - Connects to manager node and checks for new tasks.
 - Execute the task - Execute the assigned tasks.
 
- 
+#### Namespaces
+- Control what a process can see.
+  - PID
+  - Mount
+  - Network
+  - UTS
+  - IPC
+  - User
+  - Cgroup
+
+#### Cgroups
+- Control what a process can use.
+  - Memory
+  - CPU
+  - Blkio
+  - Cpuacct
+  - Cpuset
+  - Devices
+  - Net_prio
+  - Freezer

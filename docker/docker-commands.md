@@ -14,7 +14,10 @@
     ```
         docker image ls
     ```
-  
+- List of Containers
+  ```
+        docker ps
+  ```
 - Find running containers
     ```
         docker container ls
@@ -47,6 +50,11 @@
       docker scan <image-name>
   ```
   
+- Kill a Container
+  ```
+      docker kill <container-name>
+  ```
+
 
 
 - Usefull Links
