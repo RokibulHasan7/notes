@@ -147,3 +147,90 @@
 | Checking listening programs | netstat                                            |
 
 
+- In some cases you can reduce an attacker's capabilities by not preinstalling networking tools.
+
+### ping
+
+- ```ping``` is a simple program that sends ICMP ECHO_REQUEST packets to networked devices.
+- It is a simple way to test network connectivity from one host to another.
+- ICMP is a layer 4 protocol, like TCP and UDP. Kubernetes services support TCP and UDP, but not ICMP.
+- In Kubernetes ```ping``` will always fail. 
+- You will need to use ```telnet or a higher-level``` tool such as cURL to check connectivity to a service.
+- The basic use of ping is simply ```ping <address>```. This address can be an IP address or a domain.
+- By default, ping will send packets forever, and must be manually stopped. ```-c <count>``` will make ping perform
+  a fixed number before shutting down.
+
+### traceroute
+
+- ```traceroute``` shows the network route taken from one host to another.
+- traceroute allows users to easily validate or debug the route taken (or where routing fails) from one machine to another.
+- traceroute sends packets with specific IP time-to-live values.
+- traceroute displays hosts line by line, starting with first external machine. Each line contains the hostname(if available),
+  IP address and response time.
+- Example: ```traceroute k8s.io```.
+
+### dig
+
+- ```dig``` is a DNS lookup tool. You can use it ```to make DNS queries from the command line and display the results```.
+- The general form of a dig command is ```dig [options] <domain>```.
+- By default, dig will display the ```CNAME, A, AAAA records```.
+- Example: ```dig k8s.io```.
+- To display a particular type of DNS record, run ```dig <domain> <type>``` or ```dig -t <type> <domain>```. Example:
+  ```dig kubernetes.io TXT```.
+
+### telnet
+
+- ```telnet``` is both **a network protocol and a tool for using said protocol**.
+- telnet was once used for remote login, in a manner similar to ```SSH```.
+- **SSH has become dominant due to having better security.**
+- telnet is still extremely useful for ```debugging servers that use a text-based protocol```. For example, with telnet,
+  you can connect to an HTTP/1 server and manually make requests against it.
+- The basic syntax of telnet is ```telnet <address> <port>```. This establishes a connection and provides an interactive
+  command-line interface.
+- To make full use of telnet, you will need to understand ```how the applcation protocol thar you are using works```.
+- telnet is a classic tool to ```debug servers running HTTP, HTTPS, POP3, IMAP and so on```.
+
+### nmap
+
+- ```namp``` is a port  scanner, which allows you to **explore and examine services on your network**.
+- The general syntax of nmap is ```nmap [options] <target>```, where target is a domain, IP address or IP CIDR. nmap's
+  default options will give a fast and brief summary of open ports on a host.
+- Example: ```nmap 1.2.3.4```. nmap detects open ports and guesses which service is running on each port.
+- **nmap is a favorite tool for attackers**.
+
+### netstat
+
+- ```netstat``` can display a wide range of information about a machine's network stack and connections.
+- We can use the ```-a``` flag to show all connections or ```-l``` to show only listening connections.
+- Example: ```netstat -a```.
+- **A common use of netstat is to check which process is listening on a specific port.** To do that, we run
+  ```sudo netstat -lp -l``` -l for "listening" and -p for "program".
+- We can use simple tools like ```grep``` to get a clear output from netstat when we are looking for a specific result.
+  Example: ```sudo netstat -lp | grep 3000```
+
+### netcat
+
+- ```netcat``` is a multipurpose tool for making connections, sending data or listening on a socket.
+- It can be helpful as a way to "manually" run a server or client to inspect what happens in greater detail.
+- netcat is similar to telnet, though netcat is capable of many more things.
+- netcat can connect to a server when invoked as ```netcat <address> <port>```.
+
+### openssl
+
+- ```openssl``` can do things such as creating keys and certificates, signing certificates, and most relevant to us 
+  testing TLS/SSL connections.
+- OpenSSL command form: ```openssl [sub-sommand] [arguments] [options]```.
+- ```openssl s_client -connect``` will connect to a server and display detailed information about server's certificate.
+  Example: ```openssl s_client -connect k8s.io:443```.
+
+### cURL
+
+- cURL is a data transfer tool that supports multiple protocols, notably HTTP and HTTPS.
+- cURL commands are of the form ```curl [options] <URL>```.
+- cURL prints the URL's contents and sometimes cURL-specific messages to stdout.
+- By default, cURL does not follow redirects.
+- Use the ```-X``` option to perform a specific HTTP verb; e.g., use curl -X DELETE foo/bar to make a DELETE request.
+- cURL can help diagnose TLS issues.
+- cURL has a verbose flag, -v, which will print more information about the request and response.
+  Example: ```curl https://expired-tls-site -v```
+- 
