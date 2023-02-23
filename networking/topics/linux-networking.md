@@ -233,4 +233,3 @@
 - cURL can help diagnose TLS issues.
 - cURL has a verbose flag, -v, which will print more information about the request and response.
   Example: ```curl https://expired-tls-site -v```
-- 
