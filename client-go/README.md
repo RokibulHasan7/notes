@@ -10,4 +10,6 @@
 - YouTube Playlist on client-go:
   - https://www.youtube.com/watch?v=vlw1NYySbmQ&list=PLh4KH3LtJvRTb_J-8T--wZeOBV3l3uQhc&index=1
 - https://vivek-syngh.medium.com/whats-in-kubernetes-client-go-part-1-694c941d2c1c#:~:text=client%2Dgo%20is%20one%20of,you%20are%20writing%20for%20Kubernetes.
-- 
+- ```kubectl edit pod -n kube-system kube-scheduler-blabalbla-control-plane```
+- Service Accounts
+  - https://www.youtube.com/watch?v=keoYFZhtg0U
