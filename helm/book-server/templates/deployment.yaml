@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-deployment
+  labels:
+    app: {{ .Values.Deployment.AppName}}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.AppName}}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.AppName}}
+    spec:
+      containers:
+        - name: {{ .Values.Deployment.AppName}}
+          image: {{ .Values.Deployment.Image}}
+          ports:
+            - containerPort: {{ .Values.Service.ContainerPort }}

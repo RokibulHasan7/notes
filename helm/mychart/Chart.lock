@@ -1,0 +1,9 @@
+dependencies:
+- name: appmesh-controller
+  repository: https://aws.github.io/eks-charts
+  version: 1.11.0
+- name: artifactory-oss
+  repository: https://charts.truecharts.org/
+  version: 2.0.18
+digest: sha256:1dd4b4b4c36e5c2f8df8093b43e8d4998a39b48f612530829841e2c7952ebd79
+generated: "2023-03-03T12:37:28.703624277+06:00"

@@ -1,0 +1,7 @@
+Deployment :
+  AppName: book-server
+  Image: rokibulhasan114/book-api:v0.0.5
+Service:
+  Name: book-service
+  ContainerPort: 3333
+  ServicePort: 3333
