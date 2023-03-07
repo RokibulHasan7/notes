@@ -8,4 +8,3 @@
   - https://www.youtube.com/playlist?list=PLLYW3zEOaqlKYku0piyzzLFGpR9VpPvXR
 - Chart Template Guide:
   - https://helm.sh/docs/chart_template_guide/getting_started/
-- 
