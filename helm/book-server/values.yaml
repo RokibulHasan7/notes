@@ -1,6 +1,6 @@
 Deployment :
   AppName: book-server
-  Image: rokibulhasan114/book-api:v0.0.5
+  Image: rokibulhasan114/book-api:v0.0.4
   Updatetype: RollingUpdate
 Service:
   Name: book-service
