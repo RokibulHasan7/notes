@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "1",
+    "author": "Rakib",
+    "store": "Rokomari 1",
+    "text": "I tried this place last week and it was incredible! ",
+    "rating": 5,
+    "created": "2017-03-08T17:09:21.627Z"
+  },
+  {
+    "_id": "2",
+    "author": "Sakib",
+    "store": "Rokomari 2",
+    "text": "hipsters everywhere",
+    "rating": 1,
+    "created": "2017-03-08T17:10:10.426Z"
+  }
+]
