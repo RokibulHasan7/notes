@@ -17,12 +17,30 @@
   machine is a single failure domain.
 - The Kubernetes Scheduler tries to ensure that Pods from same application are distributed onto different machines
   for reliability in the presence of such failures.
+- ```metadata``` provides information that does not influence how the Pod behaves. 
 
 ## Commands
+
+- Create a Pod
+```
+kubectl create -f <yml-file>
+```
 
 - To see Pods
 ```
 kubectl get pods
+```
+
+- In some cases, you might want to retrieve a bit more information by specifying wide output.
+```
+kubectl get pods -o wide
+```
+
+- If you’d like to parse the output, using json format is probably the best option.
+```
+kubectl get pods -o json
+
+kubectl get pods -o yaml
 ```
 
 - Run a pod after creating manifest
@@ -63,6 +81,17 @@ kubectl logs <pod-name>
 ```
 kubectl exec <pod-name> -- date
 ```
+- If we'd like to create a Pod with a Mongo database.
+```
+kubectl run db --image mongo
+```
+We can confirm that a container based on the mongo image is indeed running inside the cluster by listing all the containers 
+based on the mongo image.
+```
+docker exec -it <node-name> ctr container ls | grep mongo
+```
+The above approach used to run Pods is not the best one. We used the imperative way to tell Kubernetes what to do. Even 
+though there are cases when that might be useful, most of the time we want to leverage the declarative approach.
 
 ### Liveness Probe
 
@@ -103,3 +132,17 @@ kubectl exec <pod-name> -- date
 - Two different containers in a Pod can mount the same volume at different mount paths.
 - Different ways of using volumes with pods - Communication/ synchronization, Cache, Persistent data, Mounting the
   host filesystem.
+
+### Sequence of Pod Scheduling
+
+- The sequence of events that transpired with the ```kubectl create -f db.yml``` command is as follows:
+  1. Kubernetes client (kubectl) sent a request to the API server requesting creation of a Pod defined in the db.yml file.
+  2. Since the scheduler is watching the API server for new events, it detected that there is an unassigned Pod.
+  3. The scheduler decided which node to assign the Pod to and sent that information to the API server.
+  4. Kubelet is also watching the API server. It detected that the Pod was assigned to the node it is running on.
+  5. Kubelet sent a request to Docker requesting the creation of the containers that form the Pod.
+  6. Finally, Kubelet sent a request to the API server notifying it that the Pod was created successfully.
+  
+### Playing With the Running Pod
+
+- 
