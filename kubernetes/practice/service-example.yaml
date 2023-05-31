@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-demo-2
+spec:
+  type: NodePort
+  ports:
+    - port: 28017
+      nodePort: 30001
+      protocol: TCP
+  selector:
+    type: backend
+    service: go-demo-2
+
+
+
+# The ports section specifies that the requests should be forwarded to the Pods on port 28017.
+
+# The 'selector' is used by the Service to know which Pods should receive requests. It works in the same way as ReplicaSet selectors.
+# In this case, we defined that the service should forward
+# requests to Pods with labels type set to backend and service set to go-demo.
+# Those two labels are set in the Pods spec of the ReplicaSet.
