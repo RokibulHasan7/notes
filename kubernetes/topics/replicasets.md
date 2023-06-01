@@ -22,6 +22,10 @@
 - ReplicaSet monitor cluster state using a set of Pod labels to filter Pod listing and track Pods running within a
   cluster. When initially created, a replicaSet fetches a Pod listing from the Kubernetes API and filters the results
   by labels.
+- Most applications should be scalable and all must be fault tolerant. Pods do not provide those features, ReplicaSets do.
+- The apiVersion, kind, and metadata fields are mandatory with all Kubernetes objects. ReplicaSet is no exception, i.e., it is also a Kubernetes object.
+- The bad news is that ReplicaSets are rarely used independently. You will almost never create a ReplicaSet directly just as you’re not going to create Pods.
+  Instead, we tend to create ReplicaSets through Deployments. In other words, we use ReplicaSets to create and control Pods, and Deployments to create ReplicaSets (and a few other things).
 
 
 
@@ -105,3 +109,16 @@ kubectl delete replicaset <replicaSet-name>
 ```
 kubectl delete replicaset <replicaSet-name> --cascade=false
 ```
+
+- To reuse the pods.
+```
+kubectl create -f <yaml-file> --save-config
+```
+
+## Selector
+
+- We use it to select which pods should be included in the ReplicaSet. It does not distinguish between the Pods created 
+  by a ReplicaSet or some other process. In other words, ReplicaSets and Pods are decoupled. If Pods that match the selector exist, 
+  ReplicaSet will do nothing. If they don’t, it will create as many Pods to match the value of the replicas field. Not only that 
+  ReplicaSet creates the Pods that are missing, but it also monitors the cluster and ensures that the desired number of replicas 
+  is (almost) always running. In case there are already more running Pods with the matching selector, some will be terminated to match the number set in replicas.

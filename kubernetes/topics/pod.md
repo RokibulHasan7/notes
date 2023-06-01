@@ -7,6 +7,16 @@
   hostname(UTS namespace) and can communicate using native interprocess communication channels over System V IPC or
   POSIX message queues (IPC namespace).
 - When a Pod is deleted or a container restarts, any and all data in the container's filesystem is also deleted.
+- When we sent the instruction to delete a Pod, Kubernetes tried to terminate it gracefully. The default grace period is thirty seconds. This can be changes through the ```gracePeriodSeconds```
+  value in YAML definition or ```--grace-period``` argument of the kubectl delete command.
+- A Pod is a collection of containers. However, that does not mean that multi-container Pods are common. They are rare. Most Pods you’ll create will be single container units.
+- A frequent use case of multi-container Pods used for:
+  - Continuous integrations (CI)
+  - Continuous Delivery (CD)
+  - Continuous Deployment processes (CDP)
+- Excluding some special cases, Pods are not meant to be created directly.
+- Do not create Pods by themselves. Let one of the controllers create Pods for you.
+
 
 ## POD Manifest
 
@@ -145,4 +155,10 @@ though there are cases when that might be useful, most of the time we want to le
   
 ### Playing With the Running Pod
 
-- 
+- Executing a new Process: ```kubectl exec db -- ps aux```. 
+  - kubectl exec is almost the same as the docker container exec command. The significant difference is that kubectl allows us
+    to execute a process in a container running in any node inside a cluster, while docker container exec is limited to containers running on a specific node.
+- Instead of executing a new short-lived process inside a running container, we can enter into it. For example, 
+  we can make the execution interactive with ```-i``` (stdin) and ```-t``` (terminal) arguments and run shell inside a container.
+  Example: ```kubectl exec -it db -- sh```
+
