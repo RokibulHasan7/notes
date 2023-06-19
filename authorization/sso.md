@@ -5,6 +5,7 @@
 - https://developer.okta.com/docs/concepts/oauth-openid/
 - https://developer.okta.com/docs/guides/sign-into-web-app-redirect/go/main/
 - https://developer.okta.com/docs/concepts/saml/
+- https://www.okta.com/identity-101/whats-the-difference-between-oauth-openid-connect-and-saml/
 
 ## Flows
 - Auth code
