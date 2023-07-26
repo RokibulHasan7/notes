@@ -76,3 +76,15 @@ kubectl auth reconcile -f <yaml-file>
 ```
 ```reconcile``` command operates like ```kubectl apply``` and will reconcile a set of roles and role bindings with
 the current state of the cluster.
+
+
+## Authorization in K8s
+
+- A `role` is scoped to a namespace. That means it was created in a namespace and can only be referenced by a rolebinding inside that namespace.  A roleBinding creates an association between a user, group, or service account (known as a subject in kubernetes) and a role in a namespace. It effectively says User X has Role Y in Namespace Z, or to give a concrete example: Sarah is allowed to create, update, and delete deployments in the “dev” namespace.
+- A `clusterRole` looks and acts very similar to a `role`. The only difference is that it is not namespaced. It is defined at the cluster level. Similarly, a clusterRoleBinding is the non-namespaced version of a roleBinding. When you create a clusterRoleBinding, you are giving the specified subject(s) those permissions across the entire cluster, in every namespace.
+
+## Impersonate Verb
+
+- This verb allows users to impersonate and gain the rights of other users in the cluster.
+- This feature is useful in scenarios where you want to perform actions on behalf of someone else without having to know their actual credentials or without needing to switch the context to their identity.
+- Impersonation is typically controlled by the Kubernetes API server, which needs to have the necessary permissions to perform impersonation. The API server checks the impersonation request against the cluster's RBAC (Role-Based Access Control) rules to ensure that the impersonation is allowed.
