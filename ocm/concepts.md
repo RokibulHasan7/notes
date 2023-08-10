@@ -1,5 +1,5 @@
 # OCM
-
+- https://youtu.be/5S5n0-xl2yE
 - OCM aims:
     - Cluster Inventory Management
     - Cluster Workload Placement
@@ -26,6 +26,8 @@
 - In hub cluster there will be a new ns for managed cluster. Named cluster-ns.
 - clustermanager: configuration object for ocm.
 - ManifestWork: If you want to create a kubernetes resource in managed cluster, you have to create a custom resource with this kind.
+- **ManifestWork**: ManifestWork is used to define a group of Kubernetes resources on the hub to be applied to the managed cluster. In the open-cluster-management project, a `ManifestWork` resource must be created in the cluster namespace. 
+- **Status tracking**: Work agent will track all the resources defined in `ManifestWork` and update its status. There are two types of status in manifestwork. The `resourceStatus` tracks the status of each manifest in the `ManifestWork` and `conditions` reflects the overall status of the `ManifestWork`.
 - Create clutersets in hub cluster:
   - app1
   - app2
@@ -92,4 +94,54 @@
 - kubectl get helmrelease -A
 - kubectl get licensestatues
 
-- 
+
+
+## Examples from Doc
+
+
+- ManagedClusterSet:
+```
+$ clusteradm create clusterset example-clusterset
+$ clusteradm get clustersets
+<ManagedClusterSet>
+└── <default>
+│   ├── <BoundNamespace>
+│   ├── <Status> No ManagedCluster selected
+└── <example-clusterset>
+│   ├── <BoundNamespace>
+│   ├── <Status> No ManagedCluster selected
+└── <global>
+    └── <BoundNamespace>
+    └── <Status> 1 ManagedClusters selected
+```
+
+```
+$ clusteradm clusterset set example-clusterset --clusters managed1
+$ clusteradm get clustersets
+<ManagedClusterSet>
+└── <default>
+│   ├── <BoundNamespace>
+│   ├── <Status> No ManagedCluster selected
+└── <example-clusterset>
+│   ├── <BoundNamespace>
+│   ├── <Status> 1 ManagedClusters selected
+└── <global>
+    └── <BoundNamespace>
+    └── <Status> 1 ManagedClusters selected
+```
+
+- Binding the ManagedClusterSet to a workspace namespace:
+```
+$ clusteradm clusterset bind example-clusterset --namespace default
+$ clusteradm get clustersets
+<ManagedClusterSet>
+└── <default>
+│   ├── <BoundNamespace>
+│   ├── <Status> No ManagedCluster selected
+└── <example-clusterset>
+│   ├── <Status> 1 ManagedClusters selected
+│   ├── <BoundNamespace> default
+└── <global>
+    └── <BoundNamespace>
+    └── <Status> 1 ManagedClusters selected
+```
