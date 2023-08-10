@@ -12,3 +12,5 @@
 - Kubebuilder
   - **https://www.youtube.com/watch?v=FHjLL5e7h00**
   
+- https://refactorfirst.com/create-kubernetes-custom-resource-definition-crd
+  
