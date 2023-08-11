@@ -1,4 +1,5 @@
 # OCM
+- https://github.com/RokibulHasan7/ocm-demo
 - https://youtu.be/5S5n0-xl2yE
 - OCM aims:
     - Cluster Inventory Management
@@ -54,6 +55,7 @@
 - kind export kubeconfig --name=hub
   - kubectl get nodes
   - helm ls -A
+  - curl -L https://raw.githubusercontent.com/open-cluster-management-io/clusteradm/main/install.sh | bash ---> install clusteradm
   - clusteradm init --wait: make this cluster HUB.
   - kubectl get clustermanager
   - kuebctl get managedclusters
@@ -78,7 +80,7 @@
 - kubectl create ns app2
 - clusteradm clusterset bind app2 --namespace app2
 
-- kuebctl create ns kubedb
+- kubectl create ns kubedb
 - kubectl create ns kubeops
 - clusteradm clusterset bind global --namespace kubedb
 - clusteradm clusterset bind global --namespace kubeops
@@ -90,6 +92,12 @@
 
 - To add manifestwork enable in cluster-manager yaml
   - kubectl edit ClusterManager cluster-manager
+    - ```
+      workConfiguration:
+        featureGates:
+        - feature: ManifestWorkReplicaSet
+          mode: Enable
+      ```
 - kubectl get helmrepositories -A
 - kubectl get helmrelease -A
 - kubectl get licensestatues
