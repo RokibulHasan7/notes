@@ -5,3 +5,5 @@
   - https://www.youtube.com/watch?v=_3NUI5vasPk&t=780s
 - Kubernetes playlist
   - https://www.youtube.com/playlist?list=PLVx1qovxj-akr_3XqQQgpqRyQw4GYuS4h
+- Ingress blog: 
+  - https://devopscube.com/kubernetes-ingress-tutorial/
